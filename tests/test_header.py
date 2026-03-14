@@ -22,7 +22,7 @@ class TestHeader:
             main_page.click_scooter_logo()
 
         with allure.step("Проверить что открылась главная страница"):
-            assert driver.current_url == base_url
+            assert main_page.get_current_url() == base_url
 
 
     @allure.title("Открытие главной страницы Дзена при нажатии на логотип Яндекса")
@@ -32,10 +32,10 @@ class TestHeader:
         with allure.step("Принять cookies"):
             main_page.accept_cookies()
 
-        original_window = driver.current_window_handle
+        original_window = main_page.current_window_handle()
 
         with allure.step('Нажать логотип Яндекса'):
             main_page.open_dzen_via_yandex_logo(original_window)
 
         with allure.step('Проверить что открылась главная страница Дзена'):
-            assert "dzen.ru" in driver.current_url
+            assert "dzen.ru" in main_page.get_current_url()

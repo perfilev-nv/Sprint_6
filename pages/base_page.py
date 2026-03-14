@@ -39,3 +39,10 @@ class BasePage:
 
     def wait_for_opening_url_with_specific_string(self, specific_string, time=3):
         return WebDriverWait(self.driver, time).until(EC.url_contains(specific_string))
+
+    def get_current_url(self):
+        current_url = self.driver.current_url
+        return current_url
+
+    def current_window_handle(self):
+        return self.driver.current_window_handle
