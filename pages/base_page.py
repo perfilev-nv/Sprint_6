@@ -26,3 +26,16 @@ class BasePage:
     def scroll_to_element(self, locator, time=3):
         element = self.find_element(locator)
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
+    def switch_to_opened_browser_window(self, original_window, windows_amount, time=3):
+        WebDriverWait(self.driver, time).until(EC.number_of_windows_to_be(windows_amount))
+
+        new_window = None
+        for window_handle in self.driver.window_handles:
+            if window_handle != original_window:
+                new_window = window_handle
+                self.driver.switch_to.window(window_handle)
+                break
+
+    def wait_for_opening_url_with_specific_string(self, specific_string, time=3):
+        return WebDriverWait(self.driver, time).until(EC.url_contains(specific_string))

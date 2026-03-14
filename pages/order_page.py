@@ -30,8 +30,5 @@ class OrderPage(BasePage):
     def confirm_order(self):
         self.find_element(OrderPageLocators.CONFIRM_BUTTON).click()
 
-    def get_success_order_text(self):
-        return self.get_text(OrderPageLocators.SUCCESS_ORDER_TEXT)
-
-    def click_order_status_button(self):
-        self.find_element(OrderPageLocators.STATUS_BUTTON).click()
+    def get_success_order_text_element(self):
+        return self.find_element(OrderPageLocators.SUCCESS_ORDER_TEXT)

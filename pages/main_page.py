@@ -1,7 +1,5 @@
 from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 class MainPage(BasePage):
 
@@ -33,16 +31,9 @@ class MainPage(BasePage):
     def open_dzen_via_yandex_logo(self, original_window, time=3):
         self.click_element(MainPageLocators.YANDEX_LOGO)
 
-        WebDriverWait(self.driver, time).until(EC.number_of_windows_to_be(2))
+        self.switch_to_opened_browser_window(original_window, 2)
 
-        new_window = None
-        for window_handle in self.driver.window_handles:
-            if window_handle != original_window:
-                new_window = window_handle
-                self.driver.switch_to.window(window_handle)
-                break
-
-        WebDriverWait(self.driver, time).until(EC.url_contains('dzen.ru'))
+        self.wait_for_opening_url_with_specific_string('dzen.ru')
 
 
 
